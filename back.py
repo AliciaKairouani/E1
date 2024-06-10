@@ -238,15 +238,15 @@ def save_predictions_to_supabase(predictions_df):
     
 
 def plot_confusion_matrix(y_true, y_pred):
-    label_name = ['Early','In time','short delay','long delay']
+    label_names = ['Early', 'In time', 'Short delay', 'Long delay']
     cm = confusion_matrix(y_true, y_pred)
     plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
-    tick_marks = np.arange(len(label_name))
-    plt.xlabel(tick_marks, label_name, rotation=45,'Prédictions')
-    plt.ylabel(tick_marks, label_name, rotation=45,'Vraies étiquettes')
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False,
+                xticklabels=label_names, yticklabels=label_names)
+    plt.xlabel('Prédictions')
+    plt.ylabel('Vraies étiquettes')
     plt.title('Matrice de confusion')
-    st.pyplot()
+    st.pyplot(plt)
     st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # Courbe ROC
